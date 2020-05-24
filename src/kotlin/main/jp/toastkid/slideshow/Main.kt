@@ -10,7 +10,8 @@ object Main {
     @JvmStatic
     fun main(args: Array<String>) {
         val frame = MainFrame("Slideshow")
-        frame.show()
+        val filePath = if (args.isNullOrEmpty()) "sample.md" else args[0]
+        frame.show(filePath)
     }
 
 }

@@ -1,7 +1,7 @@
 package jp.toastkid.slideshow
 
-import jp.toastkid.slideshow.slide.parser.SlideDeckReader
 import jp.toastkid.slideshow.slide.model.SlideDeck
+import jp.toastkid.slideshow.slide.parser.SlideDeckReader
 import java.awt.GraphicsEnvironment
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
@@ -17,8 +17,8 @@ class MainFrame(private val title: String) {
 
     private var deck: SlideDeck? = null
 
-    fun show() {
-        deck = SlideDeckReader(Paths.get("sample.md")).invoke()
+    fun show(filePath: String) {
+        deck = SlideDeckReader(Paths.get(filePath)).invoke()
 
         deck?.setTo(frame)
 
