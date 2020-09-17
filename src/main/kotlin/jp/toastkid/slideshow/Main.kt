@@ -7,6 +7,8 @@ package jp.toastkid.slideshow
  */
 fun main(args: Array<String>) {
     val frame = MainFrame("Slideshow")
-    val filePath = if (args.isNullOrEmpty()) "sample.md" else args[0]
+    val filePath = if (args.isNullOrEmpty()) DEFAULT_FILE_NAME else args[0]
     frame.show(filePath)
 }
+
+private const val DEFAULT_FILE_NAME = "sample.md"
