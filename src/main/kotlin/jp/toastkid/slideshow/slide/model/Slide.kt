@@ -46,13 +46,14 @@ class Slide {
 
     fun view(): JPanel {
         val titleLabel = JLabel("<html>${this.title}</html>", SwingConstants.CENTER)
-        titleLabel.font = titleLabel.font.deriveFont(120.0f)
+        titleLabel.font = titleLabel.font.deriveFont(if (front) 180f else 120.0f)
+        titleLabel.verticalAlignment = SwingConstants.CENTER
 
         val background =
                 if (backgroundPath.isNotBlank()) ImageIO.read(Files.newInputStream(Paths.get(backgroundPath))) else null
         val panel = BackgroundPanel(background)
         panel.isOpaque = background != null
-        panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
+        panel.layout = BoxLayout(panel, if (front) BoxLayout.X_AXIS else BoxLayout.PAGE_AXIS)
         panel.add(titleLabel)
         lines.forEach { panel.add(it) }
         return panel
