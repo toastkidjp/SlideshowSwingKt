@@ -112,7 +112,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                         return@forEach
                     }
                     if (isInCodeBlock && !line.startsWith("```")) {
-                        code.append(if (code.length != 0) LINE_SEPARATOR else "").append(line)
+                        code.append(if (code.isNotEmpty()) LINE_SEPARATOR else "").append(line)
                         return@forEach
                     }
                     if (line.startsWith("|")) {
@@ -138,7 +138,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                         }*/
                     }
                     // Not code.
-                    if (!line.isEmpty()) {
+                    if (line.isNotEmpty()) {
                         builder?.addText(line)
                     }
                 }
