@@ -105,7 +105,6 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                             //KotlinHighlighter(codeArea).highlight()
                             codeArea.setEditable(false)
                             codeArea.font = codeArea.font.deriveFont(60f)
-                            //codeArea.setStyle("-fx-font-size: 40pt;")
                             codeArea.text = code.toString()
                             builder?.add(codeArea)
                             code.setLength(0)
