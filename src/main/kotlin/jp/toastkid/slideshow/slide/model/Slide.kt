@@ -16,6 +16,8 @@ class Slide {
 
     private var backgroundPath = ""
 
+    private var front = false
+
     private val lines = mutableListOf<JComponent>()
 
     fun setTitle(title: String) {
@@ -36,6 +38,10 @@ class Slide {
 
     fun setBackground(background: String) {
         backgroundPath = background
+    }
+
+    fun isFront(front: Boolean) {
+        this.front = front
     }
 
     fun view(): JPanel {
