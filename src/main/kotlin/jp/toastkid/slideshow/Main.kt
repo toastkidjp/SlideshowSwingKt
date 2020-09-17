@@ -5,13 +5,8 @@ package jp.toastkid.slideshow
  *
  * @author toastkidjp
  */
-object Main {
-
-    @JvmStatic
-    fun main(args: Array<String>) {
-        val frame = MainFrame("Slideshow")
-        val filePath = if (args.isNullOrEmpty()) "sample.md" else args[0]
-        frame.show(filePath)
-    }
-
+fun main(args: Array<String>) {
+    val frame = MainFrame("Slideshow")
+    val filePath = if (args.isNullOrEmpty()) "sample.md" else args[0]
+    frame.show(filePath)
 }
