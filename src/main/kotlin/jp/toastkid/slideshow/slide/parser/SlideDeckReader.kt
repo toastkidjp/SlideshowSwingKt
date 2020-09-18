@@ -95,7 +95,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                         isInCodeBlock = !isInCodeBlock
                         if (!isInCodeBlock && code.isNotEmpty()) {
                             val codeArea = RSyntaxTextArea()
-                            codeArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA)
+                            codeArea.syntaxEditingStyle = SyntaxConstants.SYNTAX_STYLE_JAVA
                             //KotlinHighlighter(codeArea).highlight()
                             codeArea.isEditable = false
                             codeArea.font = codeArea.font.deriveFont(60f)
