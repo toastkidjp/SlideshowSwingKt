@@ -40,11 +40,19 @@ class SlideDeck {
     }
 
     fun back() {
+        if (progress.value <= 1) {
+            return
+        }
+
         cards.previous(cardPanel)
         progress.value = max(1, progress.value - 1)
     }
 
     fun forward() {
+        if (progress.value == cardPanel.componentCount) {
+            return
+        }
+
         cards.next(cardPanel)
         progress.value = min(cardPanel.componentCount, progress.value + 1)
     }
