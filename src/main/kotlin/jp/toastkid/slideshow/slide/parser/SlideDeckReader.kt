@@ -92,7 +92,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                     // Adding code block.
                     if (line.startsWith("```")) {
                         isInCodeBlock = !isInCodeBlock
-                        if (!isInCodeBlock && code.length != 0) {
+                        if (!isInCodeBlock && code.isNotEmpty()) {
                             val codeArea = JTextArea()
                             //KotlinHighlighter(codeArea).highlight()
                             codeArea.setEditable(false)
