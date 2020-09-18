@@ -31,7 +31,6 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
 
     /**
      * Init with source's path.
-     * @param p
      */
     init {
         builder = Slide()
