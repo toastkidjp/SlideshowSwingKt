@@ -2,6 +2,8 @@ package jp.toastkid.slideshow.slide.parser
 
 import jp.toastkid.slideshow.slide.model.Slide
 import jp.toastkid.slideshow.slide.model.SlideDeck
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants
 import java.awt.image.BufferedImage
 import java.io.File
 import java.io.IOException
@@ -13,7 +15,6 @@ import java.util.regex.Pattern
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 import javax.swing.JLabel
-import javax.swing.JTextArea
 
 class SlideDeckReader(private val pathToMarkdown: Path) {
 
@@ -93,7 +94,8 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                     if (line.startsWith("```")) {
                         isInCodeBlock = !isInCodeBlock
                         if (!isInCodeBlock && code.isNotEmpty()) {
-                            val codeArea = JTextArea()
+                            val codeArea = RSyntaxTextArea()
+                            codeArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA)
                             //KotlinHighlighter(codeArea).highlight()
                             codeArea.isEditable = false
                             codeArea.font = codeArea.font.deriveFont(60f)
