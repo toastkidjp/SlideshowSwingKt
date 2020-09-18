@@ -1,7 +1,5 @@
 package jp.toastkid.slideshow.slide.parser
 
-import javafx.geometry.Pos
-import javafx.scene.layout.HBox
 import jp.toastkid.slideshow.slide.model.Slide
 import jp.toastkid.slideshow.slide.model.SlideDeck
 import java.awt.image.BufferedImage
@@ -69,7 +67,6 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                             }
                             return@forEach
                         }
-                        val images = HBox()
                         extractImageUrls(line)
                                 .filterNotNull()
                                 .map {
@@ -80,10 +77,6 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                                 .forEach {
                                     builder?.add(it)
                                 }
-                        if (images.children.size == 0) {
-                            return@forEach
-                        }
-                        images.alignment = Pos.CENTER
                         return@forEach
                     }
                     if (line.startsWith("[footer](")) {
