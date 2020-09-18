@@ -95,7 +95,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                         if (!isInCodeBlock && code.isNotEmpty()) {
                             val codeArea = JTextArea()
                             //KotlinHighlighter(codeArea).highlight()
-                            codeArea.setEditable(false)
+                            codeArea.isEditable = false
                             codeArea.font = codeArea.font.deriveFont(60f)
                             codeArea.text = code.toString()
                             builder?.add(codeArea)
