@@ -22,7 +22,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
     private var builder: Slide? = null
 
     /** Table builder.  */
-    //private var tableBuilder: TableBuilder? = null
+    private var tableBuilder: TableBuilder? = null
 
     /** Code block processing.  */
     private var isInCodeBlock = false
@@ -112,24 +112,26 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                     if (line.startsWith("|")) {
                         if (!isInTable) {
                             isInTable = true
-                            // TODO tableBuilder = TableBuilder()
+                            tableBuilder = TableBuilder()
                         }
                         if (line.startsWith("|:---")) {
                             return@forEach
                         }
-                        /* TODO if (!tableBuilder.hasColumns()) {
-                                        tableBuilder.setColumns(convertTableColumns(line))
-                                        return@forEach
-                                    }*/
-                        val split = line.split("\\|".toRegex()).toTypedArray()
-                        //tableBuilder.addTableLine(Arrays.asList(*split).subList(1, split.size))
+
+                        if (tableBuilder?.hasColumns() == false) {
+                            tableBuilder?.setColumns(line)
+                            return@forEach
+                        }
+
+                        tableBuilder?.addTableLines(line)
                         return@forEach
                     }
                     if (isInTable || !line.startsWith("")) {
                         isInTable = false
-                        /*TODO if (tableBuilder != null) {
-                            builder.withContents(tableBuilder.get())
-                        }*/
+                        tableBuilder?.get()?.let {
+                            builder?.add(it)
+                        }
+                        tableBuilder = null
                     }
                     // Not code.
                     if (line.isNotEmpty()) {
@@ -170,25 +172,6 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
             imageUrls.add(matcher.group(2))
         }
         return imageUrls
-    }
-
-    /**
-     * Convert to table line.
-     * @param line
-     * @return
-     */
-    private fun convertTableColumns(line: String?) {
-            //List<TableColumn<ObservableList<String?>?, String?>>? {
-        /*
-        if (line == null || !line.contains("|")) {
-            return Collections.emptyList()
-        }
-        val columnNames = line.split("\\|".toRegex()).toTypedArray()
-        return IntStream.range(0, columnNames.size)
-                .filter { i: Int -> !columnNames[i].isEmpty() }
-                .mapToObj<Any> { i: Int -> TableColumn<ObservableList<String>, String>(columnNames[i]) }
-                .collect(Collectors.toList())
-         */
     }
 
     companion object {
