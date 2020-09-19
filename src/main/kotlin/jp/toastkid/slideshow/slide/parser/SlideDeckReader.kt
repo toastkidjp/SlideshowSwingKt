@@ -106,6 +106,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                         code.append(if (code.isNotEmpty()) LINE_SEPARATOR else "").append(line)
                         return@forEach
                     }
+
                     if (TableBuilder.isTableStart(line)) {
                         if (tableBuilder == null) {
                             tableBuilder = TableBuilder()
@@ -123,7 +124,8 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                         tableBuilder?.addTableLines(line)
                         return@forEach
                     }
-                    if (tableBuilder != null || TableBuilder.isEndLine(line)) {
+
+                    if (tableBuilder != null) {
                         tableBuilder?.get()?.let {
                             builder?.add(it)
                         }
