@@ -21,19 +21,7 @@ class PdfGenerator {
                 repeat(cardPanel.componentCount) { i: Int ->
                     val istart = System.currentTimeMillis()
                     val page = PDPage(PDRectangle(cardPanel.width.toFloat(), cardPanel.height.toFloat()))
-                    try {
-                        PDPageContentStream(doc, page).use({ content ->
-                            val screenshot = BufferedImage(cardPanel.getSize().width, cardPanel.getSize().height, BufferedImage.TYPE_INT_RGB)
-                            cardPanel.paint(screenshot.createGraphics())
-                            content.drawImage(
-                                    LosslessFactory.createFromImage(doc, screenshot),
-                                    0f,
-                                    0f
-                            )
-                        })
-                    } catch (ie: IOException) {
-                        ie.printStackTrace()
-                    }
+                    writeToPage(doc, page, cardPanel)
                     doc.addPage(page)
                     println("Ended page $i. ${System.currentTimeMillis() - istart}[ms]")
                     forward()
@@ -45,6 +33,22 @@ class PdfGenerator {
             ie.printStackTrace()
         }
         println("Ended generating PDF. ${System.currentTimeMillis() - start}[ms]")
+    }
+
+    private fun writeToPage(doc: PDDocument, page: PDPage, cardPanel: JPanel) {
+        try {
+            PDPageContentStream(doc, page).use({ content ->
+                val screenshot = BufferedImage(cardPanel.getSize().width, cardPanel.getSize().height, BufferedImage.TYPE_INT_RGB)
+                cardPanel.paint(screenshot.createGraphics())
+                content.drawImage(
+                        LosslessFactory.createFromImage(doc, screenshot),
+                        0f,
+                        0f
+                )
+            })
+        } catch (ie: IOException) {
+            ie.printStackTrace()
+        }
     }
 
 }
