@@ -37,5 +37,8 @@ class TableBuilder {
     companion object {
 
         fun isTableStart(line: String) = line.startsWith("|")
+
+        fun shouldIgnoreLine(line: String) = line.startsWith("|:---")
+
     }
 }

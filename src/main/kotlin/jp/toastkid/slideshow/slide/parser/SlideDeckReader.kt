@@ -110,7 +110,8 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                         if (tableBuilder == null) {
                             tableBuilder = TableBuilder()
                         }
-                        if (line.startsWith("|:---")) {
+
+                        if (TableBuilder.shouldIgnoreLine(line)) {
                             return@forEach
                         }
 
