@@ -27,9 +27,6 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
     /** Code block processing.  */
     private var isInCodeBlock = false
 
-    /** Table processing.  */
-    private var isInTable = false
-
     /**
      * Init with source's path.
      */
@@ -110,8 +107,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                         return@forEach
                     }
                     if (line.startsWith("|")) {
-                        if (!isInTable) {
-                            isInTable = true
+                        if (tableBuilder == null) {
                             tableBuilder = TableBuilder()
                         }
                         if (line.startsWith("|:---")) {
@@ -126,8 +122,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                         tableBuilder?.addTableLines(line)
                         return@forEach
                     }
-                    if (isInTable || !line.startsWith("")) {
-                        isInTable = false
+                    if (tableBuilder != null || !line.startsWith("")) {
                         tableBuilder?.get()?.let {
                             builder?.add(it)
                         }
