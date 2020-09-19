@@ -1,7 +1,7 @@
 package jp.toastkid.slideshow.slide.parser
 
+import java.awt.Font
 import javax.swing.BoxLayout
-import javax.swing.DefaultCellEditor
 import javax.swing.JComponent
 import javax.swing.JPanel
 import javax.swing.JTable
@@ -17,7 +17,9 @@ class TableBuilder {
         val columnNames = line.split("|").drop(1).toTypedArray()
         val tableModel = DefaultTableModel(columnNames, 0)
         table = JTable(tableModel)
-        (table?.getDefaultEditor(Any::class.java) as? DefaultCellEditor)?.component?.font?.deriveFont(30f)
+        table?.tableHeader?.font = Font(Font.SANS_SERIF, Font.PLAIN, 40)
+        table?.font = Font(Font.SANS_SERIF, Font.PLAIN, 40)
+        table?.setRowHeight(120)
         table?.isFocusable = false
         table?.isEnabled = false
     }
