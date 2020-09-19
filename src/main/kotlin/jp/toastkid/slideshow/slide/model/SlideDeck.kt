@@ -2,6 +2,7 @@ package jp.toastkid.slideshow.slide.model
 
 import java.awt.BorderLayout
 import java.awt.CardLayout
+import java.awt.Color
 import javax.swing.BoxLayout
 import javax.swing.JFrame
 import javax.swing.JLabel
@@ -60,6 +61,12 @@ class SlideDeck {
 
     fun setTo(frame: JFrame) {
         progress.maximum = cardPanel.componentCount
+        progress.foreground = Color.decode("#002277")
+        progress.isStringPainted = true
+        progress.addChangeListener {
+            progress.string = "${progress.value} / ${progress.maximum}"
+        }
+
         val content = JPanel()
         content.layout = BorderLayout()
         content.add(cardPanel, BorderLayout.CENTER)
