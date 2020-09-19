@@ -123,7 +123,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                         tableBuilder?.addTableLines(line)
                         return@forEach
                     }
-                    if (tableBuilder != null || !line.startsWith("")) {
+                    if (tableBuilder != null || TableBuilder.isEndLine(line)) {
                         tableBuilder?.get()?.let {
                             builder?.add(it)
                         }

@@ -40,5 +40,7 @@ class TableBuilder {
 
         fun shouldIgnoreLine(line: String) = line.startsWith("|:---")
 
+        fun isEndLine(line: String) = !line.startsWith("")
+
     }
 }
