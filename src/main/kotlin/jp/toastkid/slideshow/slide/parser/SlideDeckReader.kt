@@ -106,7 +106,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                         code.append(if (code.isNotEmpty()) LINE_SEPARATOR else "").append(line)
                         return@forEach
                     }
-                    if (line.startsWith("|")) {
+                    if (TableBuilder.isTableStart(line)) {
                         if (tableBuilder == null) {
                             tableBuilder = TableBuilder()
                         }

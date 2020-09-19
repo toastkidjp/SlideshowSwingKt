@@ -34,4 +34,8 @@ class TableBuilder {
         it.add(table)
     }
 
+    companion object {
+
+        fun isTableStart(line: String) = line.startsWith("|")
+    }
 }
