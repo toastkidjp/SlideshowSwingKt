@@ -38,7 +38,7 @@ class PdfGenerator {
 
     private fun writeToPage(doc: PDDocument, page: PDPage, cardPanel: JPanel) {
         try {
-            PDPageContentStream(doc, page).use({ content ->
+            PDPageContentStream(doc, page).use { content ->
                 val screenshot = BufferedImage(cardPanel.getSize().width, cardPanel.getSize().height, BufferedImage.TYPE_INT_RGB)
                 cardPanel.paint(screenshot.createGraphics())
                 content.drawImage(
@@ -46,7 +46,7 @@ class PdfGenerator {
                         0f,
                         0f
                 )
-            })
+            }
         } catch (ie: IOException) {
             ie.printStackTrace()
         }
