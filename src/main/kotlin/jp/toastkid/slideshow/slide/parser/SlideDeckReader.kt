@@ -15,6 +15,8 @@ import java.util.regex.Pattern
 import javax.imageio.ImageIO
 import javax.swing.ImageIcon
 import javax.swing.JLabel
+import javax.swing.JScrollPane
+
 
 class SlideDeckReader(private val pathToMarkdown: Path) {
 
@@ -97,7 +99,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                             codeArea.isEditable = false
                             codeArea.font = codeArea.font.deriveFont(48f)
                             codeArea.text = code.toString()
-                            builder?.add(codeArea)
+                            builder?.add(JScrollPane(codeArea))
                             code.setLength(0)
                         }
                         return@forEach
