@@ -17,7 +17,7 @@ class PdfGenerator {
         println("Start generating PDF.")
         try {
             PDDocument().use { doc ->
-                repeat(cardPanel.componentCount) { i: Int ->
+                repeat(cardPanel.componentCount) { i ->
                     val pageStart = System.currentTimeMillis()
                     val page = PDPage(PDRectangle(cardPanel.width.toFloat(), cardPanel.height.toFloat()))
                     writeToPage(doc, page, cardPanel)
