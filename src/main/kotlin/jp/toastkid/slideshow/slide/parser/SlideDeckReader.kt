@@ -97,6 +97,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                             codeArea.syntaxEditingStyle = SyntaxConstants.SYNTAX_STYLE_JAVA
                             //KotlinHighlighter(codeArea).highlight()
                             codeArea.isEditable = false
+                            codeArea.isFocusable = false
                             codeArea.font = codeArea.font.deriveFont(48f)
                             codeArea.text = code.toString()
                             builder?.add(JScrollPane(codeArea))
