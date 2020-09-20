@@ -1,6 +1,5 @@
 package jp.toastkid.slideshow.slide.model
 
-import com.sun.xml.internal.ws.spi.db.BindingContextFactory
 import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.pdmodel.PDPage
 import org.apache.pdfbox.pdmodel.PDPageContentStream
@@ -15,7 +14,7 @@ class PdfGenerator {
 
     operator fun invoke(cardPanel: JPanel, forward: () -> Unit) {
         val start = System.currentTimeMillis()
-        BindingContextFactory.LOGGER.info("Start generating PDF.")
+        println("Start generating PDF.")
         try {
             PDDocument().use({ doc ->
                 repeat(cardPanel.componentCount) { i: Int ->
