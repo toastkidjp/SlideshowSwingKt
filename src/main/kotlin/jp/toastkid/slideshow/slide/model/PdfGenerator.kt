@@ -16,10 +16,13 @@ class PdfGenerator {
         val start = System.currentTimeMillis()
         println("Start generating PDF.")
         try {
+            val width = cardPanel.width.toFloat()
+            val height = cardPanel.height.toFloat()
+
             PDDocument().use { doc ->
                 repeat(cardPanel.componentCount) { i ->
                     val pageStart = System.currentTimeMillis()
-                    val page = PDPage(PDRectangle(cardPanel.width.toFloat(), cardPanel.height.toFloat()))
+                    val page = PDPage(PDRectangle(width, height))
                     writeToPage(doc, page, cardPanel)
                     doc.addPage(page)
                     println("Ended page $i. ${System.currentTimeMillis() - pageStart}[ms]")
