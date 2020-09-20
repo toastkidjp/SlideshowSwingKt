@@ -17,8 +17,9 @@ class TableBuilder {
         val columnNames = line.split("|").drop(1).toTypedArray()
         val tableModel = DefaultTableModel(columnNames, 0)
         table = JTable(tableModel)
-        table?.tableHeader?.font = Font(Font.SANS_SERIF, Font.PLAIN, 40)
-        table?.font = Font(Font.SANS_SERIF, Font.PLAIN, 40)
+        val font = Font(Font.SANS_SERIF, Font.PLAIN, 40)
+        table?.tableHeader?.font = font
+        table?.font = font
         table?.setRowHeight(120)
         table?.isFocusable = false
         table?.isEnabled = false
