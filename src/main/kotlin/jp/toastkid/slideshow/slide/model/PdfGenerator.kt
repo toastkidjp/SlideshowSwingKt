@@ -16,7 +16,7 @@ class PdfGenerator {
         val start = System.currentTimeMillis()
         println("Start generating PDF.")
         try {
-            PDDocument().use({ doc ->
+            PDDocument().use { doc ->
                 repeat(cardPanel.componentCount) { i: Int ->
                     val istart = System.currentTimeMillis()
                     val page = PDPage(PDRectangle(cardPanel.width.toFloat(), cardPanel.height.toFloat()))
@@ -26,7 +26,7 @@ class PdfGenerator {
                     forward()
                 }
                 doc.save(File("slide.pdf"))
-            })
+            }
         } catch (ie: IOException) {
             ie.printStackTrace()
         }
