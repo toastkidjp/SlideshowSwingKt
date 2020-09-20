@@ -26,7 +26,6 @@ class PdfGenerator {
                     forward()
                 }
                 doc.save(File("slide.pdf"))
-                //snackbar.fireEvent(SnackbarEvent("Ended generating PDF."))
             })
         } catch (ie: IOException) {
             ie.printStackTrace()
