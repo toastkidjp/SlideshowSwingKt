@@ -18,11 +18,11 @@ class PdfGenerator {
         try {
             PDDocument().use { doc ->
                 repeat(cardPanel.componentCount) { i: Int ->
-                    val istart = System.currentTimeMillis()
+                    val pageStart = System.currentTimeMillis()
                     val page = PDPage(PDRectangle(cardPanel.width.toFloat(), cardPanel.height.toFloat()))
                     writeToPage(doc, page, cardPanel)
                     doc.addPage(page)
-                    println("Ended page $i. ${System.currentTimeMillis() - istart}[ms]")
+                    println("Ended page $i. ${System.currentTimeMillis() - pageStart}[ms]")
                     forward()
                 }
                 doc.save(File("slide.pdf"))
