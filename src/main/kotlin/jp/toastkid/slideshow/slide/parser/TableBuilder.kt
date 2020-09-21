@@ -20,7 +20,7 @@ class TableBuilder {
         val font = Font(Font.SANS_SERIF, Font.PLAIN, 40)
         table?.tableHeader?.font = font
         table?.font = font
-        table?.setRowHeight(120)
+        table?.rowHeight = 120
         table?.isFocusable = false
         table?.isEnabled = false
     }
