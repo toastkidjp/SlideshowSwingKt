@@ -57,7 +57,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                     }
                     if (line.startsWith("![")) {
                         if (line.startsWith("![background](")) {
-                            extractBackgroundUrl(line)?.let {
+                            BackgroundExtractor()(line)?.let {
                                 builder?.setBackground(it)
                             }
                             return@forEach
@@ -137,24 +137,9 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
         return deck
     }
 
-    /**
-     * Extract background image url from text.
-     * @param line line
-     * @return image url
-     */
-    private fun extractBackgroundUrl(line: String): String? {
-        val matcher: Matcher = BACKGROUND.matcher(line)
-        return if (!matcher.find()) {
-            null
-        } else matcher.group(1)
-    }
-
     companion object {
 
         private val LINE_SEPARATOR = System.lineSeparator()
-
-        /** Background image pattern.  */
-        private val BACKGROUND: Pattern = Pattern.compile("\\!\\[background\\]\\((.+?)\\)")
 
         /** In-line image pattern.  */
         private val FOOTER_TEXT: Pattern = Pattern.compile("\\[footer\\]\\((.+?)\\)")
