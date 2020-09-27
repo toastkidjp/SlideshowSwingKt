@@ -23,6 +23,8 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
     /** Code block processing.  */
     private var isInCodeBlock = false
 
+    private val imageExtractor = ImageExtractor()
+
     /**
      * Init with source's path.
      */
@@ -61,7 +63,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                             return@forEach
                         }
 
-                        builder?.add(ImageExtractor().invoke(line))
+                        builder?.add(imageExtractor.invoke(line))
                         return@forEach
                     }
                     if (line.startsWith("[footer](")) {
