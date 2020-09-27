@@ -4,17 +4,18 @@ import jp.toastkid.slideshow.slide.model.Slide
 import jp.toastkid.slideshow.slide.model.SlideDeck
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants
-import java.awt.image.BufferedImage
-import java.io.File
 import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.ArrayList
 import java.util.regex.Matcher
 import java.util.regex.Pattern
-import javax.imageio.ImageIO
+import javax.swing.BorderFactory
+import javax.swing.BoxLayout
 import javax.swing.ImageIcon
+import javax.swing.JComponent
 import javax.swing.JLabel
+import javax.swing.JPanel
 import javax.swing.JScrollPane
 
 
@@ -66,16 +67,21 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                             }
                             return@forEach
                         }
+                        val imagePanel = JPanel().also { panel ->
+                            panel.layout = BoxLayout(panel, BoxLayout.LINE_AXIS)
+                            panel.alignmentX = JComponent.CENTER_ALIGNMENT
+                        }
                         extractImageUrls(line)
                                 .filterNotNull()
                                 .map {
-                                    val img: BufferedImage = ImageIO.read(File(it))
-                                    val icon = ImageIcon(img)
+                                    val icon = ImageIcon(it)
                                     JLabel(icon)
                                 }
                                 .forEach {
-                                    builder?.add(it)
+                                    it.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10))
+                                    imagePanel.add(it)
                                 }
+                        builder?.add(imagePanel)
                         return@forEach
                     }
                     if (line.startsWith("[footer](")) {
@@ -183,7 +189,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
         private val BACKGROUND: Pattern = Pattern.compile("\\!\\[background\\]\\((.+?)\\)")
 
         /** In-line image pattern.  */
-        private val IMAGE: Pattern = Pattern.compile("\\!\\[(.?)\\]\\((.+?)\\)")
+        private val IMAGE: Pattern = Pattern.compile("\\!\\[(.+?)\\]\\((.+?)\\)")
 
         /** In-line image pattern.  */
         private val FOOTER_TEXT: Pattern = Pattern.compile("\\[footer\\]\\((.+?)\\)")
