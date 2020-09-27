@@ -74,8 +74,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                         extractImageUrls(line)
                                 .filterNotNull()
                                 .map {
-                                    val icon = ImageIcon(it)
-                                    JLabel(icon)
+                                    JLabel(ImageIcon(it))
                                 }
                                 .forEach {
                                     it.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10))
