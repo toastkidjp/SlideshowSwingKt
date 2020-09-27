@@ -28,7 +28,7 @@ class ImageExtractor {
                     JLabel(ImageIcon(it))
                 }
                 .forEach {
-                    it.border = BorderFactory.createEmptyBorder(10, 10, 10, 10)
+                    it.border = SIMPLE_MARGIN
                     imagePanel.add(it)
                 }
         return imagePanel
@@ -52,6 +52,8 @@ class ImageExtractor {
 
         /** In-line image pattern.  */
         private val IMAGE: Pattern = Pattern.compile("\\!\\[(.+?)\\]\\((.+?)\\)")
+
+        private val SIMPLE_MARGIN = BorderFactory.createEmptyBorder(10, 10, 10, 10)
 
     }
 }
