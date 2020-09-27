@@ -77,7 +77,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                                     JLabel(ImageIcon(it))
                                 }
                                 .forEach {
-                                    it.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10))
+                                    it.border = BorderFactory.createEmptyBorder(10, 10, 10, 10)
                                     imagePanel.add(it)
                                 }
                         builder?.add(imagePanel)
