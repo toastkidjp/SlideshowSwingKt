@@ -25,6 +25,8 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
 
     private val imageExtractor = ImageExtractor()
 
+    private val backgroundExtractor = BackgroundExtractor()
+
     /**
      * Init with source's path.
      */
@@ -57,7 +59,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                     }
                     if (line.startsWith("![")) {
                         if (line.startsWith("![background](")) {
-                            BackgroundExtractor()(line)?.let {
+                            backgroundExtractor(line)?.let {
                                 builder?.setBackground(it)
                             }
                             return@forEach
