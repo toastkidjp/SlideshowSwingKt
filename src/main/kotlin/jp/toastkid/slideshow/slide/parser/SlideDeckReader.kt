@@ -2,14 +2,11 @@ package jp.toastkid.slideshow.slide.parser
 
 import jp.toastkid.slideshow.slide.model.Slide
 import jp.toastkid.slideshow.slide.model.SlideDeck
-import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea
-import org.fife.ui.rsyntaxtextarea.SyntaxConstants
 import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.regex.Matcher
 import java.util.regex.Pattern
-import javax.swing.JScrollPane
 
 
 class SlideDeckReader(private val pathToMarkdown: Path) {
@@ -20,8 +17,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
     /** Table builder.  */
     private var tableBuilder: TableBuilder? = null
 
-    /** Code block processing.  */
-    private var isInCodeBlock = false
+    private var codeBlockBuilder = CodeBlockBuilder()
 
     private val imageExtractor = ImageExtractor()
 
@@ -42,7 +38,6 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
         val deck = SlideDeck()
         try {
             Files.lines(pathToMarkdown).use { lines ->
-                val code = StringBuilder()
                 lines.forEach { line: String ->
                     if (line.startsWith("#")) {
                         if (builder?.hasTitle() == true) {
@@ -81,22 +76,13 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                     }
                     // Adding code block.
                     if (line.startsWith("```")) {
-                        isInCodeBlock = !isInCodeBlock
-                        if (!isInCodeBlock && code.isNotEmpty()) {
-                            val codeArea = RSyntaxTextArea()
-                            codeArea.syntaxEditingStyle = SyntaxConstants.SYNTAX_STYLE_JAVA
-                            //KotlinHighlighter(codeArea).highlight()
-                            codeArea.isEditable = false
-                            codeArea.isFocusable = false
-                            codeArea.font = codeArea.font.deriveFont(48f)
-                            codeArea.text = code.toString()
-                            builder?.add(JScrollPane(codeArea))
-                            code.setLength(0)
+                        codeBlockBuilder.build()?.let {
+                            builder?.add(it)
                         }
                         return@forEach
                     }
-                    if (isInCodeBlock && !line.startsWith("```")) {
-                        code.append(if (code.isNotEmpty()) LINE_SEPARATOR else "").append(line)
+                    if (codeBlockBuilder.shouldAppend(line)) {
+                        codeBlockBuilder.append(line)
                         return@forEach
                     }
 
@@ -140,8 +126,6 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
     }
 
     companion object {
-
-        private val LINE_SEPARATOR = System.lineSeparator()
 
         /** In-line image pattern.  */
         private val FOOTER_TEXT: Pattern = Pattern.compile("\\[footer\\]\\((.+?)\\)")
