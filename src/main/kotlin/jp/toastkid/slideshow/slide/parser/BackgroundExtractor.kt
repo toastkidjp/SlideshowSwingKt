@@ -22,5 +22,6 @@ class BackgroundExtractor {
         /** Background image pattern.  */
         private val BACKGROUND: Pattern = Pattern.compile("\\!\\[background\\]\\((.+?)\\)")
 
+        fun shouldInvoke(line: String) = line.startsWith("![background](")
     }
 }
