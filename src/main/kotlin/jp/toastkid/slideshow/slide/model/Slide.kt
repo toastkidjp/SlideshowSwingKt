@@ -39,6 +39,12 @@ class Slide {
     }
 
     fun view(): JPanel {
-        return SlideViewFactory().invoke(lines, backgroundPath, front, title)
+        return slideViewFactory.invoke(lines, backgroundPath, front, title)
+    }
+
+    companion object {
+
+        private val slideViewFactory = SlideViewFactory()
+
     }
 }
