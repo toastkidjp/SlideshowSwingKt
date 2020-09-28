@@ -12,9 +12,7 @@ class BackgroundExtractor {
      */
     operator fun invoke(line: String): String? {
         val matcher: Matcher = BACKGROUND.matcher(line)
-        return if (!matcher.find()) {
-            null
-        } else matcher.group(1)
+        return if (matcher.find()) matcher.group(1) else null
     }
 
     companion object {
