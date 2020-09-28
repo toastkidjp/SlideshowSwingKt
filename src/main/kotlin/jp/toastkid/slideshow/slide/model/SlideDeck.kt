@@ -41,6 +41,11 @@ class SlideDeck {
         progress.value = 1
     }
 
+    fun last() {
+        cards.last(cardPanel)
+        progress.value = cardPanel.componentCount
+    }
+
     fun back() {
         if (progress.value <= 1) {
             return
