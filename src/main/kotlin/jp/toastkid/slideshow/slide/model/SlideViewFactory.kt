@@ -4,6 +4,7 @@ import jp.toastkid.slideshow.slide.view.BackgroundPanel
 import java.nio.file.Files
 import java.nio.file.Paths
 import javax.imageio.ImageIO
+import javax.swing.BorderFactory
 import javax.swing.BoxLayout
 import javax.swing.JComponent
 import javax.swing.JLabel
@@ -27,12 +28,23 @@ class SlideViewFactory {
             centeringPanel.add(titleLabel)
             centeringPanel.alignmentY = JComponent.CENTER_ALIGNMENT
             lines.forEach { centeringPanel.add(it) }
+            centeringPanel.border = SIMPLE_MARGIN
             panel.add(centeringPanel)
         } else {
             panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
+            titleLabel.border = SIMPLE_MARGIN
             panel.add(titleLabel)
-            lines.forEach { panel.add(it) }
+            lines.forEach {
+                it.border = SIMPLE_MARGIN
+                panel.add(it)
+            }
         }
         return panel
+    }
+
+    companion object {
+
+        private val SIMPLE_MARGIN = BorderFactory.createEmptyBorder(0, 24, 0, 24)
+
     }
 }
