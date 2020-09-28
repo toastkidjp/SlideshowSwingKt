@@ -33,7 +33,9 @@ class MainFrame(private val title: String) {
             override fun keyReleased(e: KeyEvent?) {
                 when (e?.keyCode) {
                     KeyEvent.VK_RIGHT, KeyEvent.VK_ENTER -> deck?.forward()
-                    KeyEvent.VK_LEFT, KeyEvent.VK_BACK_SPACE -> deck?.back()
+                    KeyEvent.VK_LEFT, KeyEvent.VK_BACK_SPACE -> {
+                        if (e.isControlDown) deck?.first() else deck?.back()
+                    }
                     KeyEvent.VK_F5 -> fullScreen()
                     KeyEvent.VK_ESCAPE -> window()
                     KeyEvent.VK_P -> deck?.generatePdf()
