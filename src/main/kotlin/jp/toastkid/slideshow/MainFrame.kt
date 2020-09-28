@@ -3,8 +3,8 @@ package jp.toastkid.slideshow
 import jp.toastkid.slideshow.slide.model.SlideDeck
 import jp.toastkid.slideshow.slide.parser.SlideDeckReader
 import java.awt.GraphicsEnvironment
+import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
-import java.awt.event.KeyListener
 import java.nio.file.Paths
 import javax.swing.JFrame
 import kotlin.system.exitProcess
@@ -25,10 +25,7 @@ class MainFrame(private val title: String) {
         frame.setBounds(200, 200, 800, 600)
         frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
 
-        frame.addKeyListener(object : KeyListener {
-            override fun keyTyped(e: KeyEvent?) = Unit
-
-            override fun keyPressed(e: KeyEvent?) = Unit
+        frame.addKeyListener(object : KeyAdapter() {
 
             override fun keyReleased(e: KeyEvent?) {
                 when (e?.keyCode) {
