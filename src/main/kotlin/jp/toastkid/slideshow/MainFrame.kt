@@ -40,7 +40,7 @@ class MainFrame(private val title: String) {
                     }
                     KeyEvent.VK_F5 -> fullScreen()
                     KeyEvent.VK_ESCAPE -> window()
-                    KeyEvent.VK_P -> deck?.generatePdf()
+                    KeyEvent.VK_P -> if (e.isControlDown) { deck?.generatePdf() }
                 }
             }
 
