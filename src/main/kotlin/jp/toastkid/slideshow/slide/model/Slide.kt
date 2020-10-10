@@ -1,6 +1,5 @@
 package jp.toastkid.slideshow.slide.model
 
-import java.awt.Color
 import java.awt.Font
 import javax.swing.JComponent
 import javax.swing.JLabel
