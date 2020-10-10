@@ -56,6 +56,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                         if (BackgroundExtractor.shouldInvoke(line)) {
                             backgroundExtractor(line)?.let {
                                 builder?.setBackground(it)
+                                deck.setBackground(it)
                             }
                             return@forEach
                         }

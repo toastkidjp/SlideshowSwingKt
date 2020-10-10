@@ -1,8 +1,12 @@
 package jp.toastkid.slideshow.slide.model
 
+import jp.toastkid.slideshow.slide.view.BackgroundPanel
 import java.awt.BorderLayout
 import java.awt.CardLayout
 import java.awt.Color
+import java.nio.file.Files
+import java.nio.file.Paths
+import javax.imageio.ImageIO
 import javax.swing.BoxLayout
 import javax.swing.JFrame
 import javax.swing.JLabel
@@ -23,6 +27,8 @@ class SlideDeck {
     private val footerText = JLabel()
 
     private val progress = JProgressBar(JProgressBar.HORIZONTAL, 0, 100)
+
+    private var background: String? = null
 
     init {
         cardPanel.layout = cards
@@ -72,8 +78,9 @@ class SlideDeck {
             progress.string = "${progress.value} / ${progress.maximum}"
         }
 
-        val content = JPanel()
+        val content = BackgroundPanel(ImageIO.read(Files.newInputStream(Paths.get(background))))
         content.layout = BorderLayout()
+        cardPanel.isOpaque = false
         content.add(cardPanel, BorderLayout.CENTER)
         content.add(bottomComponents, BorderLayout.SOUTH)
         frame.add(content)
@@ -84,6 +91,10 @@ class SlideDeck {
             return
         }
         this.footerText.text = footerText
+    }
+
+    fun setBackground(background: String) {
+        this.background = background
     }
 
     fun generatePdf() {
