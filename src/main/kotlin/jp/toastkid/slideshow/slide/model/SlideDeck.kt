@@ -97,6 +97,10 @@ class SlideDeck {
         this.background = background
     }
 
+    fun containsBackground(): Boolean {
+        return this.background?.isNotBlank() == true
+    }
+
     fun generatePdf() {
         first()
         PdfGenerator().invoke(cardPanel, { forward() })
