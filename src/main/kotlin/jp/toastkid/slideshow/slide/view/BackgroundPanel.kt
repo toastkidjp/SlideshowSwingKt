@@ -13,7 +13,7 @@ class BackgroundPanel(private val background: Image? = null) : JPanel() {
             return
         }
 
-        val screenSize = Toolkit.getDefaultToolkit().getScreenSize()
+        val screenSize = Toolkit.getDefaultToolkit().screenSize
         g?.drawImage(background, 0, 0, screenSize.width, screenSize.height, null)
     }
 }
