@@ -20,7 +20,7 @@ class SlideViewFactory {
         val background =
                 if (backgroundPath.isNotBlank()) ImageIO.read(Files.newInputStream(Paths.get(backgroundPath))) else null
         val panel = BackgroundPanel(background)
-        panel.isOpaque = background != null
+        panel.isOpaque = false
         if (front) {
             panel.layout = BoxLayout(panel, BoxLayout.LINE_AXIS)
             val centeringPanel = JPanel()
