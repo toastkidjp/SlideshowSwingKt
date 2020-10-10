@@ -33,9 +33,11 @@ class SlideViewFactory {
         } else {
             panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
             titleLabel.border = SIMPLE_MARGIN
+            titleLabel.isOpaque = true
             panel.add(titleLabel)
             lines.forEach {
                 it.border = SIMPLE_MARGIN
+                it.isOpaque = true
                 panel.add(it)
             }
         }
