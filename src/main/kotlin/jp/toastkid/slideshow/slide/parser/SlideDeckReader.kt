@@ -47,7 +47,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                             builder = Slide()
                         }
                         if (line.startsWith("# ")) {
-                            builder?.isFront(true)
+                            builder?.setFront(true)
                         }
                         builder?.setTitle(line.substring(line.indexOf(" ")).trim { it <= ' ' })
                         return@forEach

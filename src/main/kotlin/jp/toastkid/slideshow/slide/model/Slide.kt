@@ -42,7 +42,7 @@ class Slide {
         backgroundPath = background
     }
 
-    fun isFront(front: Boolean) {
+    fun setFront(front: Boolean) {
         this.front = front
     }
 
