@@ -2,6 +2,7 @@ package jp.toastkid.slideshow.slide.view
 
 import java.awt.Graphics
 import java.awt.Image
+import java.awt.Toolkit
 import javax.swing.JPanel
 
 class BackgroundPanel(private val background: Image? = null) : JPanel() {
@@ -11,6 +12,8 @@ class BackgroundPanel(private val background: Image? = null) : JPanel() {
         if (background == null) {
             return
         }
-        g?.drawImage(background, 0, 0, null)
+
+        val screenSize = Toolkit.getDefaultToolkit().getScreenSize()
+        g?.drawImage(background, 0, 0, screenSize.width, screenSize.height, null)
     }
 }
