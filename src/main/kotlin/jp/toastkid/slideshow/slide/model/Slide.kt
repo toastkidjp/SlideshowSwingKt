@@ -1,5 +1,7 @@
 package jp.toastkid.slideshow.slide.model
 
+import java.awt.Color
+import java.awt.Font
 import javax.swing.JComponent
 import javax.swing.JLabel
 import javax.swing.JPanel
@@ -23,6 +25,12 @@ class Slide {
     fun addText(line: String) {
         val lineLabel = JLabel("<html>$line</html>")
         lineLabel.font = lineLabel.font.deriveFont(72.0f)
+        this.lines.add(lineLabel)
+    }
+
+    fun addQuotedLines(line: String) {
+        val lineLabel = JLabel("<html>$line</html>")
+        lineLabel.font = Font("Arial", Font.ITALIC, 68)
         this.lines.add(lineLabel)
     }
 

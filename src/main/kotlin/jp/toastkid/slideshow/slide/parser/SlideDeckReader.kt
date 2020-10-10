@@ -71,7 +71,7 @@ class SlideDeckReader(private val pathToMarkdown: Path) {
                         return@forEach
                     }
                     if (line.startsWith("> ")) {
-                        //builder.addQuotedLines(line)
+                        builder?.addQuotedLines(line)
                         return@forEach
                     }
                     // Adding code block.
