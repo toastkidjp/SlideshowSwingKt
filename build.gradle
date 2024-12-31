@@ -22,8 +22,6 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation group: 'io.reactivex.rxjava3', name: 'rxjava', version: '3.0.1'
-    implementation group: 'io.reactivex.rxjava3', name: 'rxkotlin', version: '3.0.0'
     implementation group: 'com.fifesoft', name: 'rsyntaxtextarea', version: '3.1.1'
     implementation 'org.apache.pdfbox:pdfbox:2.0.21'
     testImplementation "org.junit.jupiter:junit-jupiter:5.6.1"
